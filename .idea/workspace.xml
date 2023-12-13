@@ -28,7 +28,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/sharda-FullstackTask/Task-3",
+    "last_opened_file_path": "D:/sharda-FullstackTask/Task-2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -45,6 +45,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702449505043</updated>
       <workItem from="1702449506247" duration="1204000" />
+      <workItem from="1702455137959" duration="175000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1702453492503</created>
@@ -53,7 +54,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702453492503</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="first commit">
+      <created>1702455147952</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1702455147952</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
