@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Sample data for dropdowns (replace it with your actual data)
+    const countries = ['USA', 'Canada', 'UK'];
+    const states = {
+      'USA': ['California', 'New York', 'Texas'],
+      'Canada': ['Ontario', 'Quebec', 'British Columbia'],
+      'UK': ['England', 'Scotland', 'Wales']
+    };
+    const cities = {
+      'California': ['Los Angeles', 'San Francisco', 'San Diego'],
+      'New York': ['New York City', 'Buffalo', 'Albany'],
+      'Texas': ['Houston', 'Dallas', 'Austin'],
+      'Ontario': ['Toronto', 'Ottawa', 'Mississauga'],
+      'Quebec': ['Montreal', 'Quebec City', 'Laval'],
+      'British Columbia': ['Vancouver', 'Victoria', 'Surrey'],
+      'England': ['London', 'Manchester', 'Birmingham'],
+      'Scotland': ['Edinburgh', 'Glasgow', 'Aberdeen'],
+      'Wales': ['Cardiff', 'Swansea', 'Newport']
+    };
+
+    function populateDropdown(selectElement, data) {
+      selectElement.innerHTML = '';
+      data.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.textContent = option;
+        selectElement.appendChild(optionElement);
+      });
+    }
+
+    function updateStatesDropdown() {
+      const countrySelect = document.getElementById('country');
+      const stateSelect = document.getElementById('state');
+      const citySelect = document.getElementById('city');
+
+      const selectedCountry = countrySelect.value;
+      const selectedState = stateSelect.value;
+
+      populateDropdown(stateSelect, states[selectedCountry]);
+      populateDropdown(citySelect, cities[selectedState]);
+    }
+
+    function showModal() {
+      // Clear previous form data and reset validation
+      document.getElementById('addUserForm').reset();
+      const formElements = document.getElementsByClassName('form-control');
+      for (const element of formElements) {
+        element.classList.remove('is-invalid');
+      }
+
+      // Populate initial dropdowns
+      populateDropdown(document.getElementById('country'), countries);
+      populateDropdown(document.getElementById('state'), states[countries[0]]);
+      populateDropdown(document.getElementById('city'), cities[states[countries[0]][0]]);
+
+      $('#addUserModal').modal('show');
+    }
+
+    function submitForm() {
+      // Implement your form submission logic here
+      // Perform validation before submitting the form
+
+      // For simplicity, let's just log the form data
+      const formData = {
+        fullName: document.getElementById('fullName').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        country: document.getElementById('country').value,
+        state: document.getElementById('state').value,
+        city: document.getElementById('city').value,
+        languages: Array.from(document.getElementById('languages').selectedOptions).map(option => option.value)
+      };
+
+      console.log('Form Data:', formData);
+
+      // Close the modal
+      $('#addUserModal').modal('hide');
+    }
+  </script>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h2>User Management</h2>
+    <button class="btn btn-success mb-2" onclick="showModal()">Add User</button>
+
+    <!-- Modal for adding a new user -->
+    <div class="modal" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- User registration form -->
+            <form id="addUserForm">
+              <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" class="form-control" id="fullName" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" required>
+              </div>
+              <div class="form-group">
+                <label for="country">Country</label>
+                <select class="form-control" id="country" onchange="updateStatesDropdown()" required></select>
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <select class="form-control" id="state" required></select>
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <select class="form-control" id="city" required></select>
+              </div>
+              <div class="form-group">
+                <label for="languages">Languages</label>
+                <select multiple class="form-control" id="languages" required>
+                  <option value="English">English</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="French">French</option>
+                  <!-- Add more languages as needed -->
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
